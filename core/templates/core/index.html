@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% block title %}Home{% endblock  %}
+{% block content %}        
+<h1>Bienvenido a la App de Gestión de Pagos</h1>
+{% if user.is_authenticated %}
+    <p>Hola, {{ user.username }}!</p>
+    <ul>
+        {% for pago in payments %}
+            <li>{{ pago.boleta }}: ${{ pago.amount }} (Vence: {{ pago.payment_due }})</li>
+        {% empty %}
+            <li>No tienes pagos registrados.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'core:payment_list' %}">Ver todos los pagos</a><br>
+    <form method="POST" action="{% url 'core:logout' %}">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+    </form>
+{% else %}
+    <a href="{% url 'core:login' %}">Iniciar sesión</a> o 
+    <a href="{% url 'core:register' %}">Regístrate aquí</a>
+{% endif %}
+
+{% endblock  %}

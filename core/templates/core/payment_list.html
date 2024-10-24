@@ -1,0 +1,109 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Lista de pagos{% endblock %}
+
+{% block content %}
+<h2 class="text-2xl font-bold text-center mb-6">Tus Pagos</h2>
+
+<!-- Formulario de Filtros -->
+<form method="GET" class="mb-6 flex flex-col md:flex-row gap-4 justify-center items-center">
+    <!-- Filtro por boleta -->
+    <select name="boleta" class="p-2 border rounded-md pr-10">
+        <option value="">Selecciona una Boleta</option>
+        {% for boleta in boletas %}
+        <option value="{{ boleta.id }}" {% if filtros.boleta == boleta.id|stringformat:"i" %}selected{% endif %}>
+            {{ boleta }}  
+        </option>
+        {% endfor %}
+    </select>
+
+    <!-- Filtro por mes -->
+    <select name="mes" class="p-2 border rounded-md pr-8">
+        <option value="">Mes     </option>
+        {% for mes in meses %}
+        <option value="{{ mes }}" {% if filtros.mes == mes|stringformat:"i" %}selected{% endif %}>
+            {{ mes }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <!-- Filtro por año -->
+    <select name="año" class="p-2 border rounded-md pr-7">
+        <option value="">Año     </option>
+        {% for año in años %}
+        <option value="{{ año }}" {% if filtros.año == año|stringformat:"i" %}selected{% endif %}>
+            {{ año }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <!-- Filtro por estado de pago -->
+    <select name="payed" class="p-2 border rounded-md pr-10">
+        <option value="">Pagado</option>
+        <option value="1" {% if filtros.payed == '1' %}selected{% endif %}>Sí</option>
+        <option value="0" {% if filtros.payed == '0' %}selected{% endif %}>No</option>
+    </select>
+
+    <div class="flex gap-4">
+        <button type="submit" class="py-2 px-4 bg-teal-600 text-white rounded-md hover:bg-teal-800 transition">
+            Filtrar
+        </button>
+
+        <a href="{% url 'core:payment_list' %}" 
+            class="py-2 px-4 bg-gray-400 text-white rounded-md hover:bg-gray-600 transition">
+            Resetear Filtros
+        </a>
+    </div>
+</form>
+
+<!-- Tabla de Resultados -->
+<div class="overflow-x-auto">
+    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+        <thead class="bg-teal-600 text-white">
+            <tr>
+                <th class="px-6 py-3 text-left">Boleta</th>
+                <th class="px-6 py-3 text-left">Importe</th>
+                <th class="px-6 py-3 text-left">Vencimiento</th>
+                <th class="px-6 py-3 text-left">Fecha de Pago</th>
+                <th class="px-6 py-3 text-left">Pagado</th>
+                <th class="px-6 py-3 text-left">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+            {% for pago in payments %}
+            <tr class="hover:bg-gray-100">
+                <td class="px-6 py-4">{{ pago.boleta }}</td>
+                <td class="px-6 py-4">{{ pago.amount }}</td>
+                <td class="px-6 py-4">{{ pago.payment_due }}</td>
+                <td class="px-6 py-4">{{ pago.payment_day }}</td>
+                <td class="px-6 py-4">{{ pago.payed|yesno:"Sí,No" }}</td>
+                <td class="px-6 py-4">
+                    <a href="{% url 'core:edit_payment' pago.id %}" 
+                        class="text-teal-600 hover:underline">
+                        Editar
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                    No se encontraron pagos con los filtros seleccionados.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Botón Agregar Pago -->
+<div class="mt-6 text-center">
+    <a href="{% url 'core:add_payment' %}" 
+        class="py-2 px-4 bg-teal-600 text-white rounded-md hover:bg-teal-800 transition">
+        Agregar Pago
+    </a>
+</div>
+
+{% endblock %}
+
+
+
