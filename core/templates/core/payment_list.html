@@ -6,9 +6,9 @@
 <h2 class="text-2xl font-bold text-center mb-6">Tus Pagos</h2>
 
 <!-- Formulario de Filtros -->
-<form method="GET" class="mb-6 flex flex-col md:flex-row gap-4 justify-center items-center">
+<form method="GET"  class="mb-6 flex flex-col sm:flex-row flex-wrap gap-4 justify-center items-center">
     <!-- Filtro por boleta -->
-    <select name="boleta" class="p-2 border rounded-md pr-10">
+    <select name="boleta" class="p-2 border rounded-md pr-8 sm:w-auto">
         <option value="">Selecciona una Boleta</option>
         {% for boleta in boletas %}
         <option value="{{ boleta.id }}" {% if filtros.boleta == boleta.id|stringformat:"i" %}selected{% endif %}>
@@ -18,7 +18,7 @@
     </select>
 
     <!-- Filtro por mes -->
-    <select name="mes" class="p-2 border rounded-md pr-8">
+    <select name="mes" class="p-2 border rounded-md pr-8 sm:w-auto">
         <option value="">Mes     </option>
         {% for mes in meses %}
         <option value="{{ mes }}" {% if filtros.mes == mes|stringformat:"i" %}selected{% endif %}>
@@ -28,7 +28,7 @@
     </select>
 
     <!-- Filtro por año -->
-    <select name="año" class="p-2 border rounded-md pr-7">
+    <select name="año" class="p-2 border rounded-md pr-7 sm:w-auto">
         <option value="">Año     </option>
         {% for año in años %}
         <option value="{{ año }}" {% if filtros.año == año|stringformat:"i" %}selected{% endif %}>
@@ -38,13 +38,13 @@
     </select>
 
     <!-- Filtro por estado de pago -->
-    <select name="payed" class="p-2 border rounded-md pr-10">
+    <select name="payed" class="p-2 border rounded-md pr-8 sm:w-auto">
         <option value="">Pagado</option>
         <option value="1" {% if filtros.payed == '1' %}selected{% endif %}>Sí</option>
         <option value="0" {% if filtros.payed == '0' %}selected{% endif %}>No</option>
     </select>
 
-    <div class="flex gap-4">
+    <div class="flex gap-4 w-full sm:w-auto justify-center">
         <button type="submit" class="py-2 px-4 bg-teal-600 text-white rounded-md hover:bg-teal-800 transition">
             Filtrar
         </button>
@@ -71,7 +71,7 @@
         </thead>
         <tbody class="divide-y divide-gray-200">
             {% for pago in payments %}
-            <tr class="{% if not pago.payed %}bg-rose-50{% else %}hover:bg-gray-100{% endif %}">
+            <tr class="{% if not pago.payed %}bg-rose-200 font-semibold{% else %}hover:bg-gray-100{% endif %}">
                 <td class="px-6 py-4">{{ pago.boleta }}</td>
                 <td class="px-6 py-4">{{ pago.amount }}</td>
                 <td class="px-6 py-4">{{ pago.payment_due }}</td>
