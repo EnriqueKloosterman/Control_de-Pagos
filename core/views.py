@@ -8,7 +8,11 @@ from datetime import datetime
 
 # Create your views here.
 def home(request):
-    payments = Payment.objects.filter(user=request.user) if request.user.is_authenticated else None
+    payments = (
+        Payment.objects.filter(user=request.user, payed=False)
+        if request.user.is_authenticated
+        else None
+    )
     return render(request, 'core/index.html', {'payments': payments})
 
 @login_required

@@ -24,28 +24,28 @@ class PaymentUpdateForm(forms.ModelForm):
     
 class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'w-full p-4 rounded-lg',
+        'class': 'w-full p-3 rounded-lg',
         'placeholder': 'Username'
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'w-full p-4 rounded-lg',
+        'class': 'w-full p-3 rounded-lg',
         'placeholder': 'Password'
     }))
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'w-full p-4 rounded-lg',
+        'class': 'w-full p-3 rounded-lg',
         'placeholder': 'Username'
     }))
     email = forms.EmailField(widget=forms.EmailInput(attrs={
-        'class': 'w-full p-4 rounded-lg',
+        'class': 'w-full p-3 rounded-lg',
         'placeholder': 'Email'
     }))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'w-full p-4 rounded-lg',
+        'class': 'w-full p-3 rounded-lg',
         'placeholder': 'Password'
     }))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'w-full p-4 rounded-lg',
+        'class': 'w-full p-3 rounded-lg',
         'placeholder': 'Confirm Password'
     }))

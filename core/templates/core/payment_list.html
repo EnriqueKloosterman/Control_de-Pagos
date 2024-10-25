@@ -71,7 +71,7 @@
         </thead>
         <tbody class="divide-y divide-gray-200">
             {% for pago in payments %}
-            <tr class="hover:bg-gray-100">
+            <tr class="{% if not pago.payed %}bg-rose-50{% else %}hover:bg-gray-100{% endif %}">
                 <td class="px-6 py-4">{{ pago.boleta }}</td>
                 <td class="px-6 py-4">{{ pago.amount }}</td>
                 <td class="px-6 py-4">{{ pago.payment_due }}</td>
