@@ -13,5 +13,6 @@ urlpatterns = [
     path('payments/edit/<int:payment_id>/', views.edit_payment, name='edit_payment'),
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='core/login.html', authentication_form=LoginForm), name='login'),
-    path('logout/', LogoutView.as_view(next_page='/'), name='logout')
+    path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+    path('payment/boleta', views.new_boleta, name='new_boleta')
 ]

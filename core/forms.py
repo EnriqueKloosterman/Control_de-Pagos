@@ -3,12 +3,31 @@ from . import models
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import render
 
-
+class BoletaForm(forms.ModelForm):
+    class Meta:
+        model = models.Boleta
+        fields = ('name', )
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'w-full p-3 rounded-lg',
+                'placeholder': 'Boleta'
+            })
+        } 
 class PaymentsForm(forms.ModelForm):
     class Meta:
         model = models.Payment
         fields = ['boleta', 'amount', 'payment_due', 'payment_day', 'payed']
         widgets = {
+            'boleta': forms.Select(attrs={
+                'class': 'w-full p-3 rounded-lg'
+            }),
+            'amount': forms.NumberInput(attrs={
+                'class': 'w-full p-3 rounded-lg',
+                'placeholder': 'Amount'
+            }),
+            'payed': forms.CheckboxInput(attrs={
+                'class': 'w-full p-3 rounded-lg',
+            }),
             'payment_due': forms.DateInput(attrs={'type': 'date'}),
             'payment_day': forms.DateInput(attrs={'type': 'date'}),
         }

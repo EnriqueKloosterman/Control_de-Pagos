@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Boleta, Payment
-from .forms import RegisterForm, LoginForm, PaymentsForm
+from .forms import RegisterForm, LoginForm, PaymentsForm, BoletaForm
 from django.contrib.auth.forms import AuthenticationForm
 from datetime import datetime
 
@@ -106,4 +106,17 @@ def user_login(request):
         form = LoginForm()
 
     return render(request, 'core/login.html', {'form': form})
+
+
+@login_required
+def new_boleta(request):
+    if request.method == 'POST':
+        form = BoletaForm(request.POST)
+        if form.is_valid():
+            boleta = form.save(commit=False)
+            boleta.save()
+            return redirect('core:add_payment')
+    else:
+        form = BoletaForm()
+    return render(request, 'core/add_boleta.html', {'form': form})
     
