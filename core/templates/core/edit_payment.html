@@ -1,41 +1,43 @@
 {% extends "core/base.html" %}
 {% block title %}Editar pagos{% endblock  %}
 {% block content %}
-    <div class="w-full max-w-md mx-auto p-6 bg-gray-100 rounded-lg">
-        <h2 class="text-xl font-semibold mb-4">Editar Pago</h2>
+    <div class="min-h-screen flex items-center justify-center">
+        <div class="w-full max-w-md mx-auto p-6 bg-gray-100 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4">Editar Pago</h2>
 
-        <form method="post">
+            <form method="post">
             {% csrf_token %}
 
-            <div class="mb-3">
-                <label class="inline-block mb-2">Boleta</label><br>
-                {{ form.boleta }}
-            </div>
+                <div class="mb-3">
+                    <label class="inline-block mb-2">Boleta</label><br>
+                    {{ form.boleta }}
+                </div>
 
-            <div class="mb-3">
-                <label class="inline-block mb-2">Importe</label><br>
-                {{ form.amount }}
-            </div>
+                <div class="mb-3">
+                    <label class="inline-block mb-2">Importe</label><br>
+                        {{ form.amount }}
+                </div>
 
-            <div class="mb-3">
-                <label class="inline-block mb-2">Fecha de Vencimiento</label><br>
-                {{ form.payment_due }}
-            </div>
+                <div class="mb-3">
+                    <label class="inline-block mb-2">Fecha de Vencimiento</label><br>
+                    {{ form.payment_due }}
+                </div>
 
-            <div class="mb-4">
-                <label class="block mb-2">Pagado</label>
-                {{ form.payed }}
-            </div>
+                <div class="mb-4">
+                    <label class="block mb-2">Pagado</label>
+                    {{ form.payed }}
+                </div>
 
-            <div class="mb-4">
-                <label class="block mb-2">Fecha de Pago</label>
-                {{ form.payment_day }}
-            </div>
+                <div class="mb-4">
+                    <label class="block mb-2">Fecha de Pago</label>
+                    {{ form.payment_day }}
+                </div>
 
-            <button class="w-full py-2 px-4 bg-teal-600 text-white rounded-md hover:bg-teal-800 transition">
+                <button class="w-full py-2 px-4 bg-teal-600 text-white rounded-md hover:bg-teal-800 transition">
                 Guardar
-            </button>
-        </form>
+                </button>
+            </form>
+            <p class="text-center mt-8"><a href="{% url 'core:payment_list' %}" class=" text-blue-500 hover:underline italic hover:font-semibold hover:text-blue-700">Volver a Pagos</a></p>
+        </div>
     </div>
-
 {% endblock  %}

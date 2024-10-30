@@ -26,10 +26,15 @@ class PaymentsForm(forms.ModelForm):
                 'placeholder': 'Amount'
             }),
             'payed': forms.CheckboxInput(attrs={
-                'class': 'w-full p-3 rounded-lg',
+                'class': 'rounded-lg',
             }),
-            'payment_due': forms.DateInput(attrs={'type': 'date'}),
-            'payment_day': forms.DateInput(attrs={'type': 'date'}),
+            'payment_due': forms.DateInput(attrs={
+                'type': 'date', 'class': 'w-full rounded-md'
+            }),
+            'payment_day': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'w-full rounded-md'
+            }),
         }
         
 class PaymentUpdateForm(forms.ModelForm):
