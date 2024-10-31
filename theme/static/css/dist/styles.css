@@ -1201,11 +1201,6 @@ select {
   background-color: rgb(17 94 89 / var(--tw-bg-opacity));
 }
 
-.hover\:text-lg:hover {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
 .hover\:font-semibold:hover {
   font-weight: 600;
 }
